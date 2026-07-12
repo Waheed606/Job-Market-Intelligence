@@ -3,7 +3,7 @@ from sympy.polys.domains import characteristiczero
 from sklearn.feature_extraction.text import TfidfVectorizer
 from src.logger import logging
 from src.exception import CustomeExpection
-from src.pipelines.pred_pred_pipelines import Pred_Pipelines
+from src.pipelines.pred_pipeline import Pred_Pipelines
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import sys 
