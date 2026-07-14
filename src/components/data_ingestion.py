@@ -5,8 +5,8 @@ from src.exception import CustomeExpection
 from dataclasses import dataclass
 import pandas as pd 
 from sklearn.model_selection import train_test_split
-from src.model_trainer import ModelTrainer
-from src.data_transformation import DataTransfromation
+# from src.components.model_trainer import ModelTrainer
+from src.components.data_transformation import DataTransformation
 
 @dataclass
 class DataIngestionConfig:
@@ -23,7 +23,7 @@ class DataIngestion:
         try:
             logging.info('Read the dataset')
             df=pd.read_csv('./Notebook/job_dataset.csv')
-            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=)
+            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
             df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
 
@@ -33,7 +33,7 @@ class DataIngestion:
             train_set.to_csv(self.ingestion_config.train_data_path,index=False,header=True)
             test_set.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
 
-            logging('The data ingestion is complete')
+            logging.info('The data ingestion is complete')
 
             return(
                 self.ingestion_config.train_data_path,
@@ -44,14 +44,16 @@ class DataIngestion:
             CustomeExpection(e,sys)
 
 if __name__=='__main__':
-    obj=DataIngestion
-    train_data,test_data=obj.initiate_data_ingestion
+    obj = DataIngestion()
 
-    data_transformation=DataTransfromation()
-    train_arr,test_arr=data_transformation.initiate_data_transformation(train_data,test_data)
+    
+    train_data,test_data=obj.initiate_data_ingestion()
 
-    model_trainer=ModelTrainer()
-    print(model_trainer.initiate_model_trainer(train_arr,test_arr))
+    data_transformation=DataTransformation()
+    train_arr,test_arr=data_transformation.InitiateDataTransformation(train_data,test_data)
+
+    # model_trainer=ModelTrainer()
+    # print(model_trainer.initiate_model_trainer(train_arr,test_arr))
 
 
     

@@ -14,3 +14,10 @@ class CustomeExpection(Exception):
 
     def __str__(self):
         return self.error_message
+
+# This code is used for testing
+# if __name__=='__main__':
+#     try:
+#         p=2/0
+#     except Exception as e:
+#         raise CustomeExpection(e,sys)

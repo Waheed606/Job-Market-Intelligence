@@ -28,10 +28,10 @@ class ModelTrainer:
         try:
             logging.inf('Split the training and testing set')
             X_train,X_test,y_train,y_test=(
-                train_arr[:,:-1],
-                train_arr[:,-1],
-                test_arr[:,:-1],
-                test_arr[:,-1]
+                train_arr[:,1],
+                train_arr[:,1],
+                test_arr[:,1],
+                test_arr[:,1]
                 )
             models={
                 'LogisticRegression':LogisticRegression(),

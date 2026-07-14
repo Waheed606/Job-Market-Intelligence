@@ -5,10 +5,9 @@ from pandas.core.arrays import categorical
 import sys
 import os
 import pandas as pd 
-# pyrefly: ignore [missing-import]
 import numpy as np 
 from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipelines
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder,MultiLabelBinarizer
 import re
 import string
@@ -82,16 +81,18 @@ class DataTransformation():
         try:
             logging.info('the data taining pipelines is start')
             cat_columns=['Keywords','ExperinceLevel','Title']
-            cat_pipelines=Pipelines(
+            cat_pipelines=Pipeline(
                 steps=[
-                    ('text_cleaning',self.data_transformation_method.text_cleaning()),
-                    ('OnehotEncoding',OneHotEncoder),
-                    ('LabelEncoding',LabelEncoder),
-                    ('multilabelbinarizer',MultiLabelBinarizer)
+                    # ('text_cleaning',self.data_transformation_method.text_cleaning()),
+                    ('OnehotEncoding',OneHotEncoder(handle_unknown='ignore')),
+                    # ('LabelEncoding',LabelEncoder()),
+                    # ('multilabelbinarizer',MultiLabelBinarizer())
                 ]
             )
             preprocesser=ColumnTransformer(
-                'cat_pipelines',cat_pipelines,cat_columns
+                transformers=[
+                    'cat_pipelines',cat_pipelines,cat_columns
+                ]
             )
 
             return preprocesser
@@ -102,8 +103,10 @@ class DataTransformation():
 
     def InitiateDataTransformation(self,train_path,test_path):
         try:
-            train_df=pd.read_csv('train_csv') 
-            test_df=pd.read_csv('test_csv')
+            # train_df=pd.read_csv('/artifacts/train_csv') 
+            # test_df=pd.read_csv('/artifacts/test_csv')
+            train_df=pd.read_csv(train_path)
+            test_df=pd.read_csv(test_path)
 
             logging.info('Read training and testing completed')
             logging.info('obtaining propressing object')
