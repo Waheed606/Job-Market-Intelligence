@@ -1,0 +1,9 @@
+.venv/
+Notebook/
+logs/
+artifacts/
+src.egg-info/
+.gitignore/
+__pycache__/
+*.pkl
+.git/

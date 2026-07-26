@@ -1,6 +1,0 @@
-.venv
-Notebook
-logs
-artifacts
-src.egg-info
-.gitignore

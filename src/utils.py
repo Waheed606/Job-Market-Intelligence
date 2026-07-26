@@ -34,11 +34,7 @@ def evalaute_models(X_train, X_test, y_train, y_test, models, param, n_iter=8):
     try:
         report = {}
         model_names = list(models.keys())
-
-        # Plain KFold instead of the classifier default (StratifiedKFold).
-        # StratifiedKFold requires every class to have at least n_splits
-        # members; this dataset has many classes with only 1-2 examples
-        # (high-cardinality Title target), so KFold avoids that requirement.
+        
         cv_strategy = KFold(n_splits=3, shuffle=True, random_state=42)
 
         for i in range(len(model_names)):
