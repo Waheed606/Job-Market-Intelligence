@@ -40,4 +40,4 @@ Author
 
 Waheed Khan
 BS Computer Science Student
-Machine Learning & Data Science Enthusiast
+Machine Learning & Data Science 
